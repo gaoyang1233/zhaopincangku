@@ -21,6 +21,7 @@
     from t_user
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_user
     where id = #{id,jdbcType=INTEGER}
@@ -94,6 +95,9 @@
       </if>
     </trim>
   </insert>
+    <update id="updatePassword" >
+    update t_user set password=#{password} where id = #{id}
+  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.zhaopin.pojo.User" >
     update t_user
     <set >

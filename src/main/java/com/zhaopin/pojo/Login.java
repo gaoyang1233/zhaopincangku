@@ -7,6 +7,8 @@ public class Login {
 
     private String password;
 
+    private String email;
+
     private Integer flag;
 
     public Integer getId() {
@@ -31,6 +33,15 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password == null ? null : password.trim();
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getFlag() {
