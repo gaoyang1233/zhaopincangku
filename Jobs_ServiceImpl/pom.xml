@@ -16,15 +16,13 @@
     <dependencies>
         <dependency>
             <groupId>com.worker</groupId>
-            <artifactId>Jobs_Service</artifactId>
+            <artifactId>Jobs_Mapper</artifactId>
             <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.worker</groupId>
-            <artifactId>Jobs_Mapper</artifactId>
+            <artifactId>Jobs_Service</artifactId>
             <version>1.0.0</version>
         </dependency>
-
     </dependencies>
-
 </project>

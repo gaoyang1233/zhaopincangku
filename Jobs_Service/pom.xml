@@ -24,6 +24,11 @@
             <artifactId>Jobs_Common</artifactId>
             <version>1.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.worker</groupId>
+            <artifactId>Jobs_Mapper</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
 </project>

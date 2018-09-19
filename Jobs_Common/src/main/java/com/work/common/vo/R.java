@@ -1,12 +1,14 @@
 package com.work.common.vo;
 
+import java.io.Serializable;
+
 /**
  *@Johnny
  *@Date Created in 2018/9/17 16:59
  *
  * 统一json结果类 非查询
  */
-public class R {
+public class R implements Serializable {
     private int code;
     private String msg;
     private Object data;
@@ -38,6 +40,11 @@ public class R {
     public R() {
     }
 
+    public R(int code, String msg) {
+        this.code = code;
+        this.msg = msg;
+    }
+
     public R(int code, String msg, Object data) {
         this.code = code;
         this.msg = msg;
@@ -45,10 +52,10 @@ public class R {
 
     }
     public static R ok(){
-        return new R(0,"成功",null);
+        return new R(0,"成功");
     }
     public static R error(){
-        return new R(1,"失败",null);
+        return new R(1,"失败");
     }
 
 }

@@ -1,6 +1,8 @@
 package com.work.domain.user;
 
-public class Login {
+import java.io.Serializable;
+
+public class Login implements Serializable {
     private Integer id;
 
     private String username;

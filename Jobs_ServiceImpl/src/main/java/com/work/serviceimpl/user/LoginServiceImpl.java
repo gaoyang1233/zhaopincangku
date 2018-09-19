@@ -1,38 +1,66 @@
 package com.work.serviceimpl.user;
 
 
-import com.work.common.util.ShiroEncryUtil;
+import com.alibaba.fastjson.JSON;
+import com.work.common.util.EncrypUtil;
+import com.work.common.util.JedisUtil;
+import com.work.common.vo.R;
 import com.work.domain.user.Login;
 import com.work.mapper.user.LoginMapper;
-import com.work.service.user.loginService;
+import com.work.service.user.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
-/**
- * @Author:Johnny
- * @Date: 2018/9/16 0016 下午 22:00
- */
-public class LoginServiceImpl implements loginService {
+@Service
+public class LoginServiceImpl implements LoginService {
     @Autowired
-    private LoginMapper mapper;
+    private LoginMapper loginMapper;
+
+    @Autowired
+    private JedisUtil jedisUtil;
+
     @Override
-    public Login login(String username, String password) {
-        Login login = mapper.login(username);
-        if(login!=null){
-            if (Objects.equals(login.getPassword(),ShiroEncryUtil.md5(password)))
-        return login;
+    public R login(String name, String password) {
+        Login login = loginMapper.selectByUsernameOrEmail(name);
+        if (login!= null) {
+            if(login.getFlag() == 1) {
+                if (Objects.equals(login.getPassword(),password)) {
+                    //登录成功
+                    //生成令牌
+                    String token = EncrypUtil.md5Pass(login.getId().toString(),name);
+                    //存储登录信息到Redis
+                    jedisUtil.addStr(token, JSON.toJSONString(login),TimeUnit.MINUTES,30);
+
+                    return new R(1001,"登录成功",token);
+                } else {
+                    return new R(1002,"密码不正确");
+                }
+            } else {
+                return new R(1003,"用户未激活");
+            }
+
         }
-        return null;
+        return new R(1004,"用户不存在");
     }
 
     @Override
-    public boolean selectByEmail(String email) {
-        Integer temp = mapper.selectByEmail(email);
-        if (temp!=null && temp>0){
-            return true;
-        }else{
-            return false;
+    public R checkLogin(String token) {
+        if (jedisUtil.isKey(token)) {
+            String json = jedisUtil.getStr(token);
+            jedisUtil.expire(token,TimeUnit.MINUTES,30);
+            return new R(1001,"success",JSON.parseObject(json,Login.class));
+        } else {
+            return R.error();
         }
+    }
+
+    @Override
+    public R loginout(String token) {
+        //删除Redis
+        jedisUtil.delKey(token);
+        return R.ok();
     }
 }

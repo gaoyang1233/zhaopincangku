@@ -1,5 +1,6 @@
 package com.work.domain.user;
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class User {
