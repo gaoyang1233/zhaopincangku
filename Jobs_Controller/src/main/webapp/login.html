@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jobs</title>
+    <script src="jquery.min.js"></script>
+    <script type="application/javascript">
+        function login() {
+            var f=$("#fm1");
+            $.ajax({
+                url:f[0].action,
+                method:"POST",
+                xhrFields:{withCredentials:true},//Cookie跨域
+                data:f.serialize(),
+                success:function (obj) {
+                    if(obj.code==1001){
+                        //成功
+                        location.href="index.html";
+                    }else{
+                        alert("登录失败："+obj.msg);
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <h1>欢迎登录xxx系统</h1>
+    <form action="http://localhost:8080/ssoLogin.do" id="fm1" method="post">
+        <input name="name" placeholder="用户名"><br/>
+        <input name="password" placeholder="密码"><br/>
+        <input type="button" value="xxx登录" onclick="login()">
+    </form>
+</div>
+</body>
+</html>
