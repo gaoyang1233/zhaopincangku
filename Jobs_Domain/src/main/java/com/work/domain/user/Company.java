@@ -1,5 +1,9 @@
 package com.work.domain.user;
 
+import com.work.domain.job.Job;
+
+import java.util.List;
+
 public class Company {
     private Integer id;
 
@@ -9,13 +13,23 @@ public class Company {
 
     private String type;
 
-    private Integer address;
+    private String address;
 
     private String info;
 
     private String image;
 
     private String flag;
+
+    private List<Job> jobs;
+
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
+    }
 
     public Integer getId() {
         return id;
@@ -49,11 +63,11 @@ public class Company {
         this.type = type == null ? null : type.trim();
     }
 
-    public Integer getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Integer address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 

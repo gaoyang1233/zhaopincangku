@@ -7,14 +7,15 @@
     <result column="salary" property="salary" jdbcType="INTEGER" />
     <result column="address" property="address" jdbcType="VARCHAR" />
     <result column="edu" property="edu" jdbcType="VARCHAR" />
-    <result column="exp" property="exp" jdbcType="VARCHAR" />
+    <result column="exp" property="exp" jdbcType="INTEGER" />
     <result column="info" property="info" jdbcType="VARCHAR" />
     <result column="required" property="required" jdbcType="VARCHAR" />
     <result column="comid" property="comid" jdbcType="INTEGER" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="cid" property="cid"></result>
   </resultMap>
   <sql id="Base_Column_List" >
-    id, name, salary, address, edu, exp, info, required, comid, createtime
+    id, name, salary, address, edu, exp, info, required, comid, createtime,cid
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -32,108 +33,11 @@
     </selectKey>
     insert into t_job (name, salary, address, 
       edu, exp, info, required, 
-      comid, createtime)
+      comid, createtime,cid)
     values (#{name,jdbcType=VARCHAR}, #{salary,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
       #{edu,jdbcType=VARCHAR}, #{exp,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{required,jdbcType=VARCHAR}, 
-      #{comid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
+      #{comid,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP},#{cid})
   </insert>
-  <insert id="insertSelective" parameterType="com.work.domain.job.Job" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into t_job
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="salary != null" >
-        salary,
-      </if>
-      <if test="address != null" >
-        address,
-      </if>
-      <if test="edu != null" >
-        edu,
-      </if>
-      <if test="exp != null" >
-        exp,
-      </if>
-      <if test="info != null" >
-        info,
-      </if>
-      <if test="required != null" >
-        required,
-      </if>
-      <if test="comid != null" >
-        comid,
-      </if>
-      <if test="createtime != null" >
-        createtime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="salary != null" >
-        #{salary,jdbcType=INTEGER},
-      </if>
-      <if test="address != null" >
-        #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="edu != null" >
-        #{edu,jdbcType=VARCHAR},
-      </if>
-      <if test="exp != null" >
-        #{exp,jdbcType=VARCHAR},
-      </if>
-      <if test="info != null" >
-        #{info,jdbcType=VARCHAR},
-      </if>
-      <if test="required != null" >
-        #{required,jdbcType=VARCHAR},
-      </if>
-      <if test="comid != null" >
-        #{comid,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.work.domain.job.Job" >
-    update t_job
-    <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="salary != null" >
-        salary = #{salary,jdbcType=INTEGER},
-      </if>
-      <if test="address != null" >
-        address = #{address,jdbcType=VARCHAR},
-      </if>
-      <if test="edu != null" >
-        edu = #{edu,jdbcType=VARCHAR},
-      </if>
-      <if test="exp != null" >
-        exp = #{exp,jdbcType=VARCHAR},
-      </if>
-      <if test="info != null" >
-        info = #{info,jdbcType=VARCHAR},
-      </if>
-      <if test="required != null" >
-        required = #{required,jdbcType=VARCHAR},
-      </if>
-      <if test="comid != null" >
-        comid = #{comid,jdbcType=INTEGER},
-      </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
   <update id="updateByPrimaryKey" parameterType="com.work.domain.job.Job" >
     update t_job
     set name = #{name,jdbcType=VARCHAR},
@@ -145,6 +49,7 @@
       required = #{required,jdbcType=VARCHAR},
       comid = #{comid,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP}
+      cid = #{cid}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

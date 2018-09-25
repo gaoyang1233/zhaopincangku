@@ -9,7 +9,7 @@ public interface CompanyMapper {
 
     int insertSelective(Company record);
 
-    Company selectByPrimaryKey(Integer id);
+    Company selectByCompanyId(Integer id);
 
     int updateByPrimaryKeySelective(Company record);
 

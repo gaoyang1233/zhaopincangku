@@ -6,7 +6,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!--扫描注解的类-->
-    <context:component-scan base-package="com.work.serviceimpl.user"></context:component-scan>
+    <context:component-scan base-package="com.work.serviceimpl"></context:component-scan>
     <!--事务管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
@@ -21,7 +21,7 @@
     </tx:advice>
     <!--aop配置声明式事务-->
     <aop:config proxy-target-class="true">
-        <aop:pointcut id="pt" expression="execution(* com.work.serviceimpl.user.*.*.*(..))"></aop:pointcut>
+        <aop:pointcut id="pt" expression="execution(* com.work.serviceimpl.*.*.*(..))"></aop:pointcut>
         <aop:advisor advice-ref="interceptor" pointcut-ref="pt"></aop:advisor>
     </aop:config>
 

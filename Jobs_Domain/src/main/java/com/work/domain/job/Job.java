@@ -13,7 +13,7 @@ public class Job {
 
     private String edu;
 
-    private String exp;
+    private Integer exp;
 
     private String info;
 
@@ -22,6 +22,8 @@ public class Job {
     private Integer comid;
 
     private Date createtime;
+
+    private Integer cid;
 
     public Integer getId() {
         return id;
@@ -63,12 +65,20 @@ public class Job {
         this.edu = edu == null ? null : edu.trim();
     }
 
-    public String getExp() {
+    public Integer getExp() {
         return exp;
     }
 
-    public void setExp(String exp) {
-        this.exp = exp == null ? null : exp.trim();
+    public void setExp(Integer exp) {
+        this.exp = exp;
+    }
+
+    public Integer getCid() {
+        return cid;
+    }
+
+    public void setCid(Integer cid) {
+        this.cid = cid;
     }
 
     public String getInfo() {
