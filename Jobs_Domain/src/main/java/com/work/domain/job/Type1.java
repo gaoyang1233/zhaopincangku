@@ -5,7 +5,7 @@ public class Type1 {
 
     private String name;
 
-    private String info;
+    private int flag;
 
     public Integer getId() {
         return id;
@@ -23,11 +23,11 @@ public class Type1 {
         this.name = name == null ? null : name.trim();
     }
 
-    public String getInfo() {
-        return info;
+    public int getFlag() {
+        return flag;
     }
 
-    public void setInfo(String info) {
-        this.info = info == null ? null : info.trim();
+    public void setFlag(int flag) {
+        this.flag = flag;
     }
 }

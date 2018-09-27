@@ -1,17 +1,24 @@
 package com.work.mapper.job;
 
 import com.work.domain.job.Type1;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
+import java.util.List;
 public interface Type1Mapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Type1 record);
+    @Insert("insert into t_type1(name,flag) values(#{name},1)")
+    @Options(useGeneratedKeys = true,keyProperty = "id",keyColumn = "id")
+    int insert(Type1 type1);
 
-    int insertSelective(Type1 record);
+    @Update("update t_type1 set flag=2 where id=#{id}")
+    int delete(int id);
 
-    Type1 selectByPrimaryKey(Integer id);
+    @Select("select name from t_type1")
+    List<Type1> selectAll();
 
-    int updateByPrimaryKeySelective(Type1 record);
-
-    int updateByPrimaryKey(Type1 record);
+    @Select("select name from t_type1 where name=#{name}")
+    Type1 selectByName(String name);
 }

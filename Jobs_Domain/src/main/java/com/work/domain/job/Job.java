@@ -1,7 +1,11 @@
 package com.work.domain.job;
 
+import com.work.domain.address.Address;
+
 import java.util.Date;
 
+
+//工作表
 public class Job {
     private Integer id;
 
@@ -9,17 +13,21 @@ public class Job {
 
     private Integer salary;
 
-    private String address;
+    private Address address;
 
-    private String edu;
+    private Require require;
 
-    private String exp;
+    private int sort;
 
-    private String info;
+    private int t2id;
 
-    private String required;
+    public int getT2id() {
+        return t2id;
+    }
 
-    private Integer comid;
+    public void setT2id(int t2id) {
+        this.t2id = t2id;
+    }
 
     private Date createtime;
 
@@ -36,7 +44,7 @@ public class Job {
     }
 
     public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+        this.name = name;
     }
 
     public Integer getSalary() {
@@ -47,52 +55,28 @@ public class Job {
         this.salary = salary;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
-        this.address = address == null ? null : address.trim();
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
-    public String getEdu() {
-        return edu;
+    public Require getRequire() {
+        return require;
     }
 
-    public void setEdu(String edu) {
-        this.edu = edu == null ? null : edu.trim();
+    public void setRequire(Require require) {
+        this.require = require;
     }
 
-    public String getExp() {
-        return exp;
+    public int getSort() {
+        return sort;
     }
 
-    public void setExp(String exp) {
-        this.exp = exp == null ? null : exp.trim();
-    }
-
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info == null ? null : info.trim();
-    }
-
-    public String getRequired() {
-        return required;
-    }
-
-    public void setRequired(String required) {
-        this.required = required == null ? null : required.trim();
-    }
-
-    public Integer getComid() {
-        return comid;
-    }
-
-    public void setComid(Integer comid) {
-        this.comid = comid;
+    public void setSort(int sort) {
+        this.sort = sort;
     }
 
     public Date getCreatetime() {
@@ -102,4 +86,5 @@ public class Job {
     public void setCreatetime(Date createtime) {
         this.createtime = createtime;
     }
+
 }
